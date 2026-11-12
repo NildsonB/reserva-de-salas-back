@@ -36,6 +36,9 @@ public class Reserva {
         this.status = StatusReserva.ATIVA;
     }
 
+    public Reserva() {
+    }
+
     public UUID getId() {
         return id;
     }
