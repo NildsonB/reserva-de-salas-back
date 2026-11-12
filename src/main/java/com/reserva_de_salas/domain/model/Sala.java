@@ -1,5 +1,6 @@
 package com.reserva_de_salas.domain.model;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -8,6 +9,7 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.util.UUID;
 
+@Entity
 public class Sala {
     @Id
     @GeneratedValue(strategy= GenerationType.UUID)
@@ -22,5 +24,24 @@ public class Sala {
         this.nome = nome;
         this.capacidade = capacidade;
         this.ativa = true;
+    }
+
+    public Sala() {
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public Integer getCapacidade() {
+        return capacidade;
+    }
+
+    public boolean isAtiva() {
+        return ativa;
     }
 }
