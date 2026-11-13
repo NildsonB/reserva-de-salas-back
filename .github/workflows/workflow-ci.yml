@@ -16,6 +16,26 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: reserva_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d reserva_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/reserva_test
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 21
@@ -24,6 +44,6 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
-      run: mvn -B test
+    - name: Executar testes
+      run: ./mvnw test
 
