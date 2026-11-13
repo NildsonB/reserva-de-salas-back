@@ -20,21 +20,16 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_DB: reserva_test
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: test_db
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U postgres -d reserva_test"
+          --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-
-    env:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/reserva_test
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: postgres
 
     steps:
     - uses: actions/checkout@v4
@@ -45,5 +40,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Executar testes
-      run: ./mvnw test
+      run: mvn test
+      env:
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/test_db
+          SPRING_DATASOURCE_USERNAME: postgres
+          SPRING_DATASOURCE_PASSWORD: password
 
