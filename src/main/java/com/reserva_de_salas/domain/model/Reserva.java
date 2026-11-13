@@ -1,8 +1,6 @@
 package com.reserva_de_salas.domain.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -10,7 +8,10 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
+@Table(name = "reservas")
 public class Reserva {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
