@@ -10,7 +10,9 @@ name: Workflow de Testes Unitários
 
 on:
   pull_request:
-    branches: [ "main", "develop" ]
+    branches:  
+      - main
+      - develop
 
 jobs:
   test:
