@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.UUID;
 
 @Entity
@@ -20,12 +21,12 @@ public class Reserva {
     @ManyToOne(fetch = FetchType.LAZY)
     Usuario usuario;
     @NotBlank
-    LocalDateTime inicio;
+    LocalTime inicio;
     @NotBlank
-    LocalDateTime fim;
+    LocalTime fim;
     StatusReserva status;
 
-    public Reserva(Sala sala, Usuario usuario, LocalDateTime inicio, LocalDateTime fim) {
+    public Reserva(Sala sala, Usuario usuario, LocalTime inicio, LocalTime fim) {
         this.sala = sala;
         this.usuario = usuario;
         this.inicio = inicio;
@@ -52,11 +53,11 @@ public class Reserva {
         return usuario;
     }
 
-    public LocalDateTime getInicio() {
+    public LocalTime getInicio() {
         return inicio;
     }
 
-    public LocalDateTime getFim() {
+    public LocalTime getFim() {
         return fim;
     }
 
