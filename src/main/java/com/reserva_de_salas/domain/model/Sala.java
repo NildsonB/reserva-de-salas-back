@@ -1,5 +1,7 @@
 package com.reserva_de_salas.domain.model;
 
+import com.reserva_de_salas.domain.dto.AtualizaCadastroSalaDto;
+import com.reserva_de_salas.domain.dto.CadastroSalaDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -18,13 +20,22 @@ public class Sala {
     private Integer capacidade;
     private boolean ativa;
 
-    public Sala(String nome, Integer capacidade) {
-        this.nome = nome;
-        this.capacidade = capacidade;
+    public Sala(CadastroSalaDto dto) {
+        this.nome = dto.nome();
+        this.capacidade = dto.capacidade();
         this.ativa = true;
     }
 
     public Sala() {
+    }
+
+    public void atualizarDados(AtualizaCadastroSalaDto dto){
+        this.nome = dto.nome();
+        this.capacidade = dto.capacidade();
+    }
+
+    public void alterarStatus(){
+        this.ativa = !ativa;
     }
 
     public UUID getId() {
