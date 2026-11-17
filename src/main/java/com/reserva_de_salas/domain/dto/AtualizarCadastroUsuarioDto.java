@@ -1,4 +1,6 @@
 package com.reserva_de_salas.domain.dto;
 
-public record CadastrarUsuarioDto(String nome, String email) {
+import java.util.UUID;
+
+public record AtualizarCadastroUsuarioDto(UUID id, String nome, String email) {
 }
