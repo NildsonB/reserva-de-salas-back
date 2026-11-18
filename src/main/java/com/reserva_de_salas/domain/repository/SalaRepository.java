@@ -7,4 +7,6 @@ import java.util.UUID;
 
 public interface SalaRepository extends JpaRepository<Sala, Integer> {
     Sala findById(UUID id);
+
+    Sala findByNomeContainsIgnoreCase(String nome);
 }
