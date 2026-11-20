@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class SalaService {
@@ -25,9 +26,11 @@ public class SalaService {
                 .toList();
     }
 
-    public SalaDto buscarSalaPorNome(String nome) {
-        Sala sala = repository.findByNomeContainsIgnoreCase(nome);
-        return new SalaDto(sala.getId(), sala.getNome(), sala.getCapacidade(), sala.isAtiva());
+    public List<SalaDto> buscarSalaPorNome(String nome) {
+        List<Sala> sala = repository.findByNomeContainsIgnoreCase(nome);
+        return sala.stream()
+                .map(s -> new SalaDto(s.getId(), s.getNome(), s.getCapacidade(), s.isAtiva()))
+                .toList();
     }
 
     public void cadastrarSala(CadastroSalaDto dto){
@@ -42,14 +45,14 @@ public class SalaService {
         repository.save(sala);
     }
 
-    public void alterarStatusSala(AlterarStatusSalaDto dto){
-        Sala sala = repository.findById(dto.id());
+    public void alterarStatusSala(UUID id){
+        Sala sala = repository.findById(id);
         sala.alterarStatus();
         repository.save(sala);
     }
 
-    public void deletarSala(DeletarSalaDto dto) {
-        Sala sala = repository.findById(dto.id());
+    public void deletarSala(UUID id) {
+        Sala sala = repository.findById(id);
         repository.delete(sala);
     }
 }
