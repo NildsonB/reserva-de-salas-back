@@ -9,6 +9,10 @@
 name: Workflow de Testes Unitários
 
 on:
+  push:
+    branches:
+      - main
+      - develop
   pull_request:
     branches:  
       - main
