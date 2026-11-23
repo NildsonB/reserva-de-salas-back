@@ -5,7 +5,7 @@ import com.reserva_de_salas.domain.model.Reserva;
 
 public class ValidarSalaAtiva {
 
-    public void validarSalaAtiva(Reserva reserva){
+    public void validar(Reserva reserva){
         if(!reserva.getSala().isAtiva()){
             throw new ValidacaoException("A sala deve estar ativa para reservar!");
         }

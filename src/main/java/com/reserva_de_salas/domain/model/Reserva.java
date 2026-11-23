@@ -14,15 +14,11 @@ public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     Sala sala;
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     Usuario usuario;
-    @NotBlank
     LocalTime inicio;
-    @NotBlank
     LocalTime fim;
     StatusReserva status;
 
